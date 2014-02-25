@@ -14,27 +14,28 @@ import java.util.List;
 public class ContaController {
 	ContaComposite contaRaiz;
 	ContaComposite contaSelec;
-	ContaComposite contaNula = new Conta("Selecione (ou nao) -", DebitoCredito.DEBITO, null);
+	ContaComposite contaNula;// = new Conta("Selecione (ou nao) -", DebitoCredito.DEBITO, null);
 	Calendar dataIni = Calendar.getInstance();
 	Calendar dataFim = Calendar.getInstance();
 	ContaComposite contaDe;
 	ContaComposite contaPara;
 
 	
-	public ContaController(ContaComposite contaRaiz) {
+	public ContaController(ContaComposite contaRaiz, ContaComposite contaNula) {
 		this.contaRaiz = contaRaiz;
+		this.contaNula = contaNula;
 		contaDe = contaRaiz;
 		contaPara = contaRaiz;
 		dataIni = Calendar.getInstance();
 		dataFim = Calendar.getInstance();
 	}
 	
-	public void novo() {
-		contaRaiz = new Conta("Plano de Contas2", DebitoCredito.DEBITO, null);
-		contaSelec = contaRaiz;
-		contaDe = contaRaiz;
-		contaPara = contaRaiz;
-	}
+//	public void novo() {
+//		contaRaiz = new Conta("Plano de Contas2", DebitoCredito.DEBITO, null);
+//		contaSelec = contaRaiz;
+//		contaDe = contaRaiz;
+//		contaPara = contaRaiz;
+//	}
 	
 	public void salva(String arq) {
 		try {

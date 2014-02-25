@@ -94,19 +94,19 @@ public class FContas extends JFrame {
 	JTable tabela;
 
 	// Painel de entrada ou edicao de contas
-	JPanel painelDialog;
+	ContaCadastroPanel painelDialog;
     JTextField tfNomeConta;
     JComboBox<DebitoCredito> cbDC = new JComboBox<DebitoCredito>(DebitoCredito.values()); 
 	
-	public FContas(ContaComposite contaRaiz) {
+	public FContas(ContaComposite contaRaiz, ContaComposite contaNula) {
 		super("Plano de Contas");
-		controlador = new ContaController(contaRaiz);
+		controlador = new ContaController(contaRaiz, contaNula);
 		initComponents();
 	}
 	
 	public void initComponents() {
 //		controlador.carrega("/home/gleiton/contas.ser");
-		controlador.novo();
+//		controlador.novo();
 		initTree(controlador.getContaRaiz());
 		arvore.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
@@ -141,7 +141,6 @@ public class FContas extends JFrame {
 		painelL.add(rola,BorderLayout.CENTER);
 		painel1.setLayout(new GridLayout(1,2));
 		painel1.add(painelL);
-//		painel1.add(painelC2);
 		
 		JPanel painelC0 = new JPanel();
 		painelC0.setBackground(Color.LIGHT_GRAY);
@@ -187,12 +186,7 @@ public class FContas extends JFrame {
 		initFormLanca();
 		
 		// Painel usado pelo Dialog
-		painelDialog = new JPanel();
-	    tfNomeConta = new JTextField(50);
-	    painelDialog.add(new JLabel("Nome:"));
-	    painelDialog.add(tfNomeConta);
-	    painelDialog.add(new JLabel("Debito/Credito:"));
-	    painelDialog.add(cbDC);
+		painelDialog = new ContaCadastroPanel();
 	    
 	}
 	
@@ -208,13 +202,12 @@ public class FContas extends JFrame {
 					pai = (ContaComposite)arvore.getSelectionPath().getLastPathComponent();
 				}
 				
+				painelDialog.novo(pai);
 				JOptionPane.showMessageDialog(null, painelDialog);
 				
-				new Conta(tfNomeConta.getText(),(DebitoCredito)cbDC.getSelectedItem(),pai);
+				new Conta(painelDialog.getNome(),painelDialog.getDebitoCredito(),pai);
 				initTree(controlador.getContaRaiz());
 				rola.setViewportView(arvore);
-				tfNomeConta.setText("");
-				cbDC.setSelectedItem(DebitoCredito.DEBITO);
 				expandeTudo();
 				repaint();
 			}
@@ -246,15 +239,12 @@ public class FContas extends JFrame {
 				}
 				
 				ContaComposite conta = (ContaComposite)arvore.getSelectionPath().getLastPathComponent();
-				tfNomeConta.setText(conta.getNome());
-				cbDC.setSelectedItem(conta.getDebitoCredito());
+				painelDialog.editar(conta);
 				JOptionPane.showMessageDialog(null, painelDialog);
-				conta.setNome(tfNomeConta.getText());
-				conta.setDebitoCredito((DebitoCredito)cbDC.getSelectedItem());
+				conta.setNome(painelDialog.getNome());
+				conta.setDebitoCredito(painelDialog.getDebitoCredito());
 				initTree(controlador.getContaRaiz());
 				rola.setViewportView(arvore);
-				tfNomeConta.setText("");
-				cbDC.setSelectedItem(DebitoCredito.DEBITO);
 				expandeTudo();
 				repaint();
 			}
