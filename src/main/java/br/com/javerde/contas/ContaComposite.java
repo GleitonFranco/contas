@@ -8,6 +8,8 @@ public interface ContaComposite {
 	public String getCodigo();
 	public String getNomeCompleto();
 	public String getPath();
+	public DebitoCredito getDebitoCredito();
+	public void setDebitoCredito(DebitoCredito dc);
 	public double getCredito();
 	public double getDebito();
 	public double getCreditoTotal();

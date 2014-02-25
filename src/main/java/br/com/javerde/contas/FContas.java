@@ -92,11 +92,11 @@ public class FContas extends JFrame {
 	
 	TMLanca tmLanca;
 	JTable tabela;
-	
+
+	// Painel de entrada ou edicao de contas
 	JPanel painelDialog;
     JTextField tfNomeConta;
-    JTextField tfDC;
-    JComboBox cbDC = new JComboBox(new String[]{"Debito","Credito"}); 
+    JComboBox<DebitoCredito> cbDC = new JComboBox<DebitoCredito>(DebitoCredito.values()); 
 	
 	public FContas(ContaComposite contaRaiz) {
 		super("Plano de Contas");
@@ -189,7 +189,6 @@ public class FContas extends JFrame {
 		// Painel usado pelo Dialog
 		painelDialog = new JPanel();
 	    tfNomeConta = new JTextField(50);
-	    tfDC = new JTextField(10);
 	    painelDialog.add(new JLabel("Nome:"));
 	    painelDialog.add(tfNomeConta);
 	    painelDialog.add(new JLabel("Debito/Credito:"));
@@ -211,10 +210,11 @@ public class FContas extends JFrame {
 				
 				JOptionPane.showMessageDialog(null, painelDialog);
 				
-				new Conta(tfNomeConta.getText(),pai);
+				new Conta(tfNomeConta.getText(),(DebitoCredito)cbDC.getSelectedItem(),pai);
 				initTree(controlador.getContaRaiz());
 				rola.setViewportView(arvore);
 				tfNomeConta.setText("");
+				cbDC.setSelectedItem(DebitoCredito.DEBITO);
 				expandeTudo();
 				repaint();
 			}
@@ -228,11 +228,10 @@ public class FContas extends JFrame {
 					return;
 				}
 				ContaComposite conta = (ContaComposite)arvore.getSelectionPath().getLastPathComponent();
-				tfNomeConta.setText(conta.getNome());
-				conta.setNome(tfNomeConta.getText());
+				ContaComposite pai = conta.getContaPai();
+				pai.removeConta(conta);
 				initTree(controlador.getContaRaiz());
 				rola.setViewportView(arvore);
-				tfNomeConta.setText("");
 				expandeTudo();
 				repaint();
 			}
@@ -245,11 +244,17 @@ public class FContas extends JFrame {
 					JOptionPane.showMessageDialog(null, "Nenhum n�� foi selecionado!");
 					return;
 				}
+				
 				ContaComposite conta = (ContaComposite)arvore.getSelectionPath().getLastPathComponent();
-				ContaComposite pai = conta.getContaPai();
-				pai.removeConta(conta);
+				tfNomeConta.setText(conta.getNome());
+				cbDC.setSelectedItem(conta.getDebitoCredito());
+				JOptionPane.showMessageDialog(null, painelDialog);
+				conta.setNome(tfNomeConta.getText());
+				conta.setDebitoCredito((DebitoCredito)cbDC.getSelectedItem());
 				initTree(controlador.getContaRaiz());
 				rola.setViewportView(arvore);
+				tfNomeConta.setText("");
+				cbDC.setSelectedItem(DebitoCredito.DEBITO);
 				expandeTudo();
 				repaint();
 			}

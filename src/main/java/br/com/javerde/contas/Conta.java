@@ -15,13 +15,13 @@ public class Conta implements ContaComposite, Serializable {
 	private ContaComposite contaPai;
 	private String nome;
 	private int codigo;
+	private DebitoCredito debitoCredito;
 	private double credito;
 	private double debito;
 	private double creditoTotal;
 	private double debitoTotal;
 	
-	
-	public Conta(String nome, ContaComposite pai) {
+	public Conta(String nome, DebitoCredito dc, ContaComposite pai) {
 		contaPai = pai;
 		if (pai == null) {
 			codigo = 0;
@@ -30,6 +30,7 @@ public class Conta implements ContaComposite, Serializable {
 			pai.addConta(this);
 		}
 		this.nome = nome;
+		this.debitoCredito=dc;
 	}
 	
 //	
@@ -48,7 +49,7 @@ public class Conta implements ContaComposite, Serializable {
 
 //	
 	public String getNomeCompleto() {
-		return getCodigo()+" - "+getNome();
+		return getCodigo()+" - "+getNome()+" ("+debitoCredito.getAbrev()+")";
 	}
 
 //	
@@ -56,7 +57,14 @@ public class Conta implements ContaComposite, Serializable {
 		return "";
 	}
 
-//	
+	public DebitoCredito getDebitoCredito() {
+		return debitoCredito;
+	}
+	
+	public void setDebitoCredito(DebitoCredito dc) {
+		debitoCredito=dc;
+	}
+	
 	public double getCredito() {//lancamentos
 		return credito;
 	}

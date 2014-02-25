@@ -14,7 +14,7 @@ import java.util.List;
 public class ContaController {
 	ContaComposite contaRaiz;
 	ContaComposite contaSelec;
-	ContaComposite contaNula = new Conta("Selecione (ou nao) -",null);
+	ContaComposite contaNula = new Conta("Selecione (ou nao) -", DebitoCredito.DEBITO, null);
 	Calendar dataIni = Calendar.getInstance();
 	Calendar dataFim = Calendar.getInstance();
 	ContaComposite contaDe;
@@ -30,7 +30,7 @@ public class ContaController {
 	}
 	
 	public void novo() {
-		contaRaiz = new Conta("Plano de Contas2",null);
+		contaRaiz = new Conta("Plano de Contas2", DebitoCredito.DEBITO, null);
 		contaSelec = contaRaiz;
 		contaDe = contaRaiz;
 		contaPara = contaRaiz;
