@@ -30,6 +30,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -71,13 +74,9 @@ public class FContas extends JFrame {
 	MultiComboPanel painelDe;
 	MultiComboPanel painelPara;
 	JScrollPane painelC2;
-	JTextField tfNome = new JTextField(50);
-	JButton bSalvarTudo = new JButton("Salvar Tudo");
-	JButton bCarregar = new JButton("Carregar Tudo");
 	JButton bAdicionarNo = new JButton("Adiciona No'");
 	JButton bRemoverNo = new JButton("Remover No'");
 	JButton bEditarNo = new JButton("Editar No'");
-	JButton bNovoPlano = new JButton("Novo Plano");
 	
 	JTextField tfDe = new JTextField();
 	JTextField tfPara = new JTextField();
@@ -92,11 +91,26 @@ public class FContas extends JFrame {
 	
 	TMLanca tmLanca;
 	JTable tabela;
+	
+	// Componentes de MENU
+	JMenuBar menu = new JMenuBar();
+	JMenu menuArquivo = new JMenu("Arquivo");
+	JMenuItem itemNovo = new JMenuItem("Novo");
+	JMenuItem itemAbrir = new JMenuItem("Abrir");
+	JMenuItem itemSalvar = new JMenuItem("Salvar");
+	{
+		menuArquivo.setMnemonic('a');
+		menu.add(menuArquivo);
+		menuArquivo.add(itemNovo);
+		menuArquivo.add(itemAbrir);
+		menuArquivo.add(itemSalvar);
+	}
 
 	// Painel de entrada ou edicao de contas
 	ContaCadastroPanel painelDialog;
-    JTextField tfNomeConta;
     JComboBox<DebitoCredito> cbDC = new JComboBox<DebitoCredito>(DebitoCredito.values()); 
+    
+    
 	
 	public FContas(ContaComposite contaRaiz, ContaComposite contaNula) {
 		super("Plano de Contas");
@@ -120,21 +134,14 @@ public class FContas extends JFrame {
 		rola.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		rola.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		rola.setViewportView(arvore);
-//		rola.setPreferredSize(new Dimension(300, 2000));
-		
+	
 		painelN.setLayout(new GridLayout(0,2));
-		painelN.add(new JLabel("Comandos de Plano de Contas:"));
+		painelN.add(new JLabel("Comandos para a Arvore de Contas:"));
 		painelN.add(new JLabel(""));
-		painelN.add(bCarregar);
-		painelN.add(bSalvarTudo);
-		painelN.add(new JLabel("Comandos de Contas Individuais:"));
-		painelN.add(new JLabel(""));
-		painelN.add(new JLabel("Nome"));
-		painelN.add(tfNome);
 		painelN.add(bAdicionarNo);
 		painelN.add(bRemoverNo);
 		painelN.add(bEditarNo);
-		painelN.add(bNovoPlano);
+		painelN.add(new JLabel(""));
 
 		painelL.setLayout(new BorderLayout());
 		painelL.add(painelN,BorderLayout.NORTH);
@@ -187,6 +194,9 @@ public class FContas extends JFrame {
 		
 		// Painel usado pelo Dialog
 		painelDialog = new ContaCadastroPanel();
+		
+		// MENU
+		setJMenuBar(menu);
 	    
 	}
 	
@@ -209,7 +219,10 @@ public class FContas extends JFrame {
 				initTree(controlador.getContaRaiz());
 				rola.setViewportView(arvore);
 				expandeTudo();
-				repaint();
+				painelDe.atualiza(controlador.getContaRaiz());
+				painelPara.atualiza(controlador.getContaRaiz());
+				System.out.println(painelDe.cbList.size());
+				System.out.println(controlador.contaRaiz.getContas().size());
 			}
 		});
 		
@@ -265,17 +278,17 @@ public class FContas extends JFrame {
 				controlador.getContaRaiz().addLanca(lanca);
 				painelC2.revalidate();
 				painelC2.repaint();
+				tabela.revalidate();
+				tabela.repaint();
 				System.out.println(lanca);
 				repaint();
 			}
 		});
 		
-		bSalvarTudo.addActionListener(new ActionListener() {
+		itemSalvar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser();
-				//new FileDialog(FContas.this, "Salvar", FileDialog.SAVE).getFile();
-				
 				fc.showSaveDialog(FContas.this);
 				File file = fc.getSelectedFile();
 				System.out.println(file.getAbsolutePath());
@@ -283,7 +296,7 @@ public class FContas extends JFrame {
 			}
 		});
 		
-		bCarregar.addActionListener(new ActionListener() {
+		itemAbrir.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser();
@@ -300,7 +313,7 @@ public class FContas extends JFrame {
 			}
 		});
 		
-		bNovoPlano.addActionListener(new ActionListener() {
+		itemNovo.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 //				controlador.novo();
@@ -335,13 +348,8 @@ public class FContas extends JFrame {
 	}
 	
 	public void initTable(ContaComposite conta) {
-//		painelC2.revalidate();
-//		painelC2.repaint();
-
-//		painelC2.remove(tabela);
 		tmLanca = new TMLanca(conta.getLancamentos());
 		tabela = new JTable(tmLanca);
-//		painelC2.add(tabela);
 		painelC2.setViewportView(tabela);
 		painelC2.validate();
 		repaint();
