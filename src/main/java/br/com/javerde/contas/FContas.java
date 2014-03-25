@@ -66,7 +66,7 @@ public class FContas extends JFrame {
 	JPanel painel1 = new JPanel();
 	JPanel painel2 = new JPanel();
 	JPanel painel3 = new JPanel();
-	
+
 	JPanel painelN = new JPanel();
 	JPanel painelL = new JPanel();
 	JPanel painelC = new JPanel();
@@ -78,6 +78,7 @@ public class FContas extends JFrame {
 	JButton bRemoverNo = new JButton("Remover No'");
 	JButton bEditarNo = new JButton("Editar No'");
 	
+	// Componentes Lancamentos
 	JTextField tfDe = new JTextField();
 	JTextField tfPara = new JTextField();
 	JTextField tfDataIni = new JTextField();
@@ -153,11 +154,11 @@ public class FContas extends JFrame {
 		painelC0.setBackground(Color.LIGHT_GRAY);
 		painelC0.add(new JLabel("Lancamentos Contabeis"));
 		
-		painelDe = new MultiComboPanel("De (D��bito):",controlador.contaRaiz, controlador.contaNula);
+		painelDe = new MultiComboPanel("De (Debito):",controlador.contaRaiz, controlador.contaNula);
 		
-		painelPara = new MultiComboPanel("Para (Cr��bito):",controlador.contaRaiz, controlador.contaNula);
+		painelPara = new MultiComboPanel("Para (Crebito):",controlador.contaRaiz, controlador.contaNula);
 		
-		painelC1.add(new JLabel("Data In��cio:"));
+		painelC1.add(new JLabel("Data Inicio:"));
 		painelC1.add(tfDataIni);
 		
 		painelC1.add(new JLabel("Data Fim:"));
@@ -166,7 +167,7 @@ public class FContas extends JFrame {
 		painelC1.add(new JLabel("Valor"));
 		painelC1.add(tfValor);
 		
-		painelC1.add(new JLabel("Hist��rico:"));
+		painelC1.add(new JLabel("Historico:"));
 		painelC1.add(tfHistorico);
 		
 		painelC1.add(bNovo);
@@ -263,6 +264,18 @@ public class FContas extends JFrame {
 			}
 		});
 
+		
+		// COMANDOS PARA OS LANCAMENTOS
+		
+		bNovo.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				painelDe.atualiza(controlador.getContaRaiz());
+				painelPara.atualiza(controlador.getContaRaiz());
+				repaint();
+			}
+		});
+		
 		bSalvar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -359,8 +372,8 @@ public class FContas extends JFrame {
 	}
 	
 	public void initFormLanca() {
-		tfDataIni.setText(String.format("%tF", controlador.getDataIni()));
-		tfDataFim.setText(String.format("%tF", controlador.getDataFim()));
+		tfDataIni.setText(String.format("%1$td/%1$tm/%1$tY", controlador.getDataIni()));
+		tfDataFim.setText(String.format("%1$td/%1$tm/%1$tY", controlador.getDataFim()));
 		
 	}
 	
