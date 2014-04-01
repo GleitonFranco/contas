@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-public class TMLanca extends AbstractTableModel {
+public class TableModelLanca extends AbstractTableModel {
 
 	public List<Lancamento> lancamentos;
 	
-	public TMLanca(List<Lancamento> lancamentos) {
+	public TableModelLanca(List<Lancamento> lancamentos) {
 		this.lancamentos = lancamentos;
 	}
 	

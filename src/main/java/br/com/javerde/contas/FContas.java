@@ -74,9 +74,9 @@ public class FContas extends JFrame {
 	MultiComboPanel painelDe;
 	MultiComboPanel painelPara;
 	JScrollPane painelC2;
-	JButton bAdicionarNo = new JButton("Adiciona No'");
-	JButton bRemoverNo = new JButton("Remover No'");
-	JButton bEditarNo = new JButton("Editar No'");
+	JButton bAdicionarNo = new JButton("Adiciona Item");
+	JButton bRemoverNo = new JButton("Remover Item");
+	JButton bEditarNo = new JButton("Editar Item");
 	
 	// Componentes Lancamentos
 	JTextField tfDe = new JTextField();
@@ -90,7 +90,7 @@ public class FContas extends JFrame {
 	JButton bSalvar = new JButton("Salvar");
 	JButton bCancelar = new JButton("Cancelar");
 	
-	TMLanca tmLanca;
+	TableModelLanca tmLanca;
 	JTable tabela;
 	
 	// Componentes de MENU
@@ -126,7 +126,7 @@ public class FContas extends JFrame {
 		arvore.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
 		controlador.getContaRaiz().addLanca(new Lancamento());
-		tmLanca=new TMLanca(controlador.getContaRaiz().getLancamentos());
+		tmLanca=new TableModelLanca(controlador.getContaRaiz().getLancamentos());
 		tabela = new JTable(tmLanca);
 		painelC2 = new JScrollPane(tabela);
 		painelC2.setBackground(Color.BLUE);
@@ -136,13 +136,13 @@ public class FContas extends JFrame {
 		rola.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		rola.setViewportView(arvore);
 	
-		painelN.setLayout(new GridLayout(0,2));
+		painelN.setLayout(new GridLayout(0,3));
 		painelN.add(new JLabel("Comandos para a Arvore de Contas:"));
+		painelN.add(new JLabel(""));
 		painelN.add(new JLabel(""));
 		painelN.add(bAdicionarNo);
 		painelN.add(bRemoverNo);
 		painelN.add(bEditarNo);
-		painelN.add(new JLabel(""));
 
 		painelL.setLayout(new BorderLayout());
 		painelL.add(painelN,BorderLayout.NORTH);
@@ -231,7 +231,7 @@ public class FContas extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				if (arvore.getSelectionCount()==0) {
-					JOptionPane.showMessageDialog(null, "Nenhum n�� foi selecionado!");
+					JOptionPane.showMessageDialog(null, "Nenhum Item foi selecionado!");
 					return;
 				}
 				ContaComposite conta = (ContaComposite)arvore.getSelectionPath().getLastPathComponent();
@@ -248,7 +248,7 @@ public class FContas extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				if (arvore.getSelectionCount()==0) {
-					JOptionPane.showMessageDialog(null, "Nenhum n�� foi selecionado!");
+					JOptionPane.showMessageDialog(null, "Nenhum Item foi selecionado!");
 					return;
 				}
 				
@@ -344,7 +344,7 @@ public class FContas extends JFrame {
 	
 	public void initTree(ContaComposite raiz) {
 		
-		treeModel = new ContaTreeModel(raiz);
+		treeModel = new TreeModelConta(raiz);
 		arvore = new JTree(treeModel);
 		repaint();
 		System.out.println("Iniciando - Raiz: "+raiz.getNomeCompleto());
@@ -361,7 +361,7 @@ public class FContas extends JFrame {
 	}
 	
 	public void initTable(ContaComposite conta) {
-		tmLanca = new TMLanca(conta.getLancamentos());
+		tmLanca = new TableModelLanca(conta.getLancamentos());
 		tabela = new JTable(tmLanca);
 		painelC2.setViewportView(tabela);
 		painelC2.validate();

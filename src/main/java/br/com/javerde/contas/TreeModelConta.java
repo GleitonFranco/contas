@@ -7,11 +7,11 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-public class ContaTreeModel implements TreeModel {
+public class TreeModelConta implements TreeModel {
 	private ContaComposite contaRaiz;
 	private List<TreeModelListener> listeners = new ArrayList<TreeModelListener>();
 	
-	public ContaTreeModel(ContaComposite contaRaiz) {
+	public TreeModelConta(ContaComposite contaRaiz) {
 		this.contaRaiz = contaRaiz;
 	}
 	
