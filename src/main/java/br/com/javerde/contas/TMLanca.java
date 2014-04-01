@@ -31,9 +31,9 @@ public class TMLanca extends AbstractTableModel {
 			break;
 			case 1 : o=lancamentos.get(lin).contaPara;
 			break;
-			case 2 : o=String.format("%tc",lancamentos.get(lin).dataIni);//.getTime();
+			case 2 : o=String.format("%1$td/%1$tm/%1$tY",lancamentos.get(lin).dataIni);//.getTime();
 			break;
-			case 3 : o=String.format("%tc",lancamentos.get(lin).dataVenc);//.getTime();
+			case 3 : o=String.format("%1$td/%1$tm/%1$tY",lancamentos.get(lin).dataVenc);//.getTime();
 			break;
 			case 4 : o=lancamentos.get(lin).historico;
 			break;
