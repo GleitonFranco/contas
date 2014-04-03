@@ -1,4 +1,4 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.viewswing;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -10,6 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import br.com.javerde.contas.ContaComposite;
 
 public class MultiComboPanel extends JScrollPane {
 	/**

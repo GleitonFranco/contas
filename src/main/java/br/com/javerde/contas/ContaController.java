@@ -83,6 +83,10 @@ public class ContaController {
 	public void setContaRaiz(ContaComposite contaRaiz) {
 		this.contaRaiz = contaRaiz;
 	}
+	
+	public ContaComposite getContaNula() {
+		return contaNula;
+	}
 
 	public ContaComposite getContaSelec() {
 		return contaSelec;

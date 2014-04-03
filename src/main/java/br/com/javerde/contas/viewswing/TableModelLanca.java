@@ -1,9 +1,10 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.viewswing;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
+import br.com.javerde.contas.Lancamento;
 
 public class TableModelLanca extends AbstractTableModel {
 

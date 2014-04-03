@@ -1,5 +1,7 @@
 package br.com.javerde.contas;
 
+import br.com.javerde.contas.viewswing.FContas;
+
 
 public class ContasMain {
 

@@ -10,12 +10,12 @@ public class Lancamento implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1635516074480302406L;
-	ContaComposite contaDe;
-	ContaComposite contaPara;
-	Calendar dataIni;
-	Calendar dataVenc;
-	double valor;
-	String historico;
+	public ContaComposite contaDe;
+	public ContaComposite contaPara;
+	public Calendar dataIni;
+	public Calendar dataVenc;
+	public double valor;
+	public String historico;
 	
 	
 	@Override

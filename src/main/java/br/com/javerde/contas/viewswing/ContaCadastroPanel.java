@@ -1,8 +1,11 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.viewswing;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import br.com.javerde.contas.ContaComposite;
+import br.com.javerde.contas.DebitoCredito;
 
 public class ContaCadastroPanel extends JPanel {
 

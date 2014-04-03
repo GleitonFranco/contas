@@ -1,4 +1,4 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.viewswing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -48,6 +48,12 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+
+import br.com.javerde.contas.Conta;
+import br.com.javerde.contas.ContaComposite;
+import br.com.javerde.contas.ContaController;
+import br.com.javerde.contas.DebitoCredito;
+import br.com.javerde.contas.Lancamento;
 
 public class FContas extends JFrame {
 
@@ -154,9 +160,9 @@ public class FContas extends JFrame {
 		painelC0.setBackground(Color.LIGHT_GRAY);
 		painelC0.add(new JLabel("Lancamentos Contabeis"));
 		
-		painelDe = new MultiComboPanel("De (Debito):",controlador.contaRaiz, controlador.contaNula);
+		painelDe = new MultiComboPanel("De (Debito):",controlador.getContaRaiz(), controlador.getContaNula());
 		
-		painelPara = new MultiComboPanel("Para (Crebito):",controlador.contaRaiz, controlador.contaNula);
+		painelPara = new MultiComboPanel("Para (Crebito):",controlador.getContaRaiz(), controlador.getContaNula());
 		
 		painelC1.add(new JLabel("Data Inicio:"));
 		painelC1.add(tfDataIni);
@@ -223,7 +229,7 @@ public class FContas extends JFrame {
 				painelDe.atualiza(controlador.getContaRaiz());
 				painelPara.atualiza(controlador.getContaRaiz());
 				System.out.println(painelDe.cbList.size());
-				System.out.println(controlador.contaRaiz.getContas().size());
+				System.out.println(controlador.getContaRaiz().getContas().size());
 			}
 		});
 		
