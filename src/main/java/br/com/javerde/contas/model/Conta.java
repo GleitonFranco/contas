@@ -6,12 +6,9 @@ import java.util.List;
 
 public class Conta implements ContaComposite, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4204298292371563272L;
-	private List<ContaComposite> contas;
-	private List<Lancamento> lancamentos;
+	private List<ContaComposite> contas = new ArrayList<ContaComposite>();
+	private List<Lancamento> lancamentos = new ArrayList<Lancamento>();
 	private ContaComposite contaPai;
 	private String nome;
 	private int codigo;
@@ -21,14 +18,9 @@ public class Conta implements ContaComposite, Serializable {
 	private double creditoTotal;
 	private double debitoTotal;
 	
-	public Conta(String nome, DebitoCredito dc, ContaComposite pai) {
-		contaPai = pai;
-		if (pai == null) {
-			codigo = 0;
-		} else {
-			codigo = pai.getContas().size()+1;
-			pai.addConta(this);
-		}
+	public Conta(String nome, DebitoCredito dc, ContaComposite contaPai) {
+		this.contaPai = contaPai;
+		mountingParent(contaPai);
 		this.nome = nome;
 		this.debitoCredito=dc;
 	}
@@ -36,6 +28,14 @@ public class Conta implements ContaComposite, Serializable {
 //	
 	public String getNome() {
 		return nome;
+	}
+	
+	private void mountingParent(ContaComposite conta){
+		this.codigo = 0;
+		if(!isRaiz()){
+			this.codigo = conta.getContas().size()+1;
+			conta.addConta(this);
+		}
 	}
 
 //	
@@ -53,10 +53,6 @@ public class Conta implements ContaComposite, Serializable {
 	}
 
 //	
-	public String getPath() {
-		return "";
-	}
-
 	public DebitoCredito getDebitoCredito() {
 		return debitoCredito;
 	}
@@ -86,19 +82,24 @@ public class Conta implements ContaComposite, Serializable {
 
 	
 	public void setCredito(double credito) {
+		this.credito = credito;
+	}
+	
+	public void addCredito(double credito) {
 		this.credito += credito;
 	}
 	
 	
 	public void setDebito(double debito) {
+		this.debito = debito;
+	}
+	
+	public void addDebito(double debito) {
 		this.debito += debito;
 	}
 	
 	
 	public void addLanca(Lancamento lanca) {
-		if (lancamentos==null) {
-			lancamentos = new ArrayList<Lancamento>();
-		}
 		lancamentos.add(lanca);
 	}
 
@@ -109,9 +110,6 @@ public class Conta implements ContaComposite, Serializable {
 
 	
 	public void addConta(ContaComposite conta) {
-		if (contas==null) {
-			contas = new ArrayList<ContaComposite>();
-		}
 		contas.add(conta);
 	}
 
@@ -127,12 +125,12 @@ public class Conta implements ContaComposite, Serializable {
 
 	
 	public List<ContaComposite> getContas() {
-		return contas==null?new ArrayList<ContaComposite>():contas;
+		return contas;
 	}
 	
 	
 	public List<Lancamento> getLancamentos() {
-		return lancamentos==null?new ArrayList<Lancamento>():lancamentos;
+		return lancamentos;
 	}
 
 	
@@ -150,4 +148,20 @@ public class Conta implements ContaComposite, Serializable {
 		this.contaPai = c;
 	}
 
+	public boolean isRaiz() {
+		return getContaPai() == null;
+	}
+	
+	public void exibirHierarquiaDeContas(){
+		exibirHierarquiaDeContas(this);
+	}
+	
+	public void exibirHierarquiaDeContas(ContaComposite conta) {
+		System.out.println(conta.getNomeCompleto());
+		if(conta.isRaiz() || !conta.getContas().isEmpty()){
+			for (ContaComposite contaFilha : conta.getContas()) {
+				exibirHierarquiaDeContas(contaFilha);
+			}
+		}
+	}
 }

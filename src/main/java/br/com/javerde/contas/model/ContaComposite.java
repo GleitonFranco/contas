@@ -7,7 +7,6 @@ public interface ContaComposite {
 	public String getNome();
 	public String getCodigo();
 	public String getNomeCompleto();
-	public String getPath();
 	public DebitoCredito getDebitoCredito();
 	public void setDebitoCredito(DebitoCredito dc);
 	public double getCredito();
@@ -25,6 +24,8 @@ public interface ContaComposite {
 	public List<Lancamento> getLancamentos();
 	public ContaComposite getContaPai();
 	public void setContaPai(ContaComposite c);
+	public boolean isRaiz();
+	public void exibirHierarquiaDeContas();
 	
 }
 
