@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import br.com.javerde.contas.ContaComposite;
+import br.com.javerde.contas.model.ContaComposite;
 
 public class MultiComboPanel extends JScrollPane {
 	/**

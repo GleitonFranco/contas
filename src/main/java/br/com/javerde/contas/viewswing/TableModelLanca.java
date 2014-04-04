@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.com.javerde.contas.Lancamento;
+import br.com.javerde.contas.model.Lancamento;
 
 public class TableModelLanca extends AbstractTableModel {
 

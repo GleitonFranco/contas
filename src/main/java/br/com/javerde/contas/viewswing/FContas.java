@@ -49,11 +49,11 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import br.com.javerde.contas.Conta;
-import br.com.javerde.contas.ContaComposite;
-import br.com.javerde.contas.ContaController;
-import br.com.javerde.contas.DebitoCredito;
-import br.com.javerde.contas.Lancamento;
+import br.com.javerde.contas.controller.ContaController;
+import br.com.javerde.contas.model.Conta;
+import br.com.javerde.contas.model.ContaComposite;
+import br.com.javerde.contas.model.DebitoCredito;
+import br.com.javerde.contas.model.Lancamento;
 
 public class FContas extends JFrame {
 

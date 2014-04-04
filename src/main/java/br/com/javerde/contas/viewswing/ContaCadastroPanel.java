@@ -4,8 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import br.com.javerde.contas.ContaComposite;
-import br.com.javerde.contas.DebitoCredito;
+import br.com.javerde.contas.model.ContaComposite;
+import br.com.javerde.contas.model.DebitoCredito;
 
 public class ContaCadastroPanel extends JPanel {
 

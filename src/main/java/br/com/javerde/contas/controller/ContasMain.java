@@ -1,5 +1,7 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.controller;
 
+import br.com.javerde.contas.model.Conta;
+import br.com.javerde.contas.model.DebitoCredito;
 import br.com.javerde.contas.viewswing.FContas;
 
 

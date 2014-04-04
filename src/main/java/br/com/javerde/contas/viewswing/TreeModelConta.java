@@ -7,7 +7,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import br.com.javerde.contas.ContaComposite;
+import br.com.javerde.contas.model.ContaComposite;
 
 public class TreeModelConta implements TreeModel {
 	private ContaComposite contaRaiz;

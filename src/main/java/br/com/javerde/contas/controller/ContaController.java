@@ -1,4 +1,4 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+
+import br.com.javerde.contas.model.ContaComposite;
 
 public class ContaController {
 	ContaComposite contaRaiz;

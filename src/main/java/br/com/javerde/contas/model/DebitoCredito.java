@@ -1,4 +1,4 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.model;
 
 public enum DebitoCredito {
 	DEBITO(-1,"D"),

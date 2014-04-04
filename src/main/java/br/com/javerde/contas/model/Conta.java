@@ -1,4 +1,4 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

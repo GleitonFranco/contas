@@ -2,7 +2,7 @@ package br.com.javerde.contas.viewswing;
 
 import javax.swing.JComboBox;
 
-import br.com.javerde.contas.DebitoCredito;
+import br.com.javerde.contas.model.DebitoCredito;
 
 public class JComboBoxDC extends JComboBox<DebitoCredito> {
 	/**

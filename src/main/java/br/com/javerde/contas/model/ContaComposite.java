@@ -1,4 +1,4 @@
-package br.com.javerde.contas;
+package br.com.javerde.contas.model;
 
 import java.util.List;
 
